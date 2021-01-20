@@ -1,3 +1,5 @@
+package Week_1;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -38,7 +40,7 @@ public class ClientList {
         ClientList myClientList = new ClientList();
 
         // open text file
-        File petFile = new File("pets.txt");
+        File petFile = new File("Week_1/pets.txt");
         // open a Scanner to read data from File
         Scanner petReader = null;
         try {
@@ -119,7 +121,7 @@ public class ClientList {
                 PrintWriter out = null;
                 // open file for writing
                 try {
-                    out = new PrintWriter(new File("pets.txt"));
+                    out = new PrintWriter(new File("Week_1/pets.txt"));
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
