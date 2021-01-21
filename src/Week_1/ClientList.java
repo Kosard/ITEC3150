@@ -40,7 +40,7 @@ public class ClientList {
         ClientList myClientList = new ClientList();
 
         // open text file
-        File petFile = new File("Week_1/pets.txt");
+        File petFile = new File("C:\\Users\\kevin\\IntelliJIDEAProjects\\ITEC3150\\src\\Week_1\\pets.txt");
         // open a Scanner to read data from File
         Scanner petReader = null;
         try {
@@ -89,6 +89,7 @@ public class ClientList {
         }
 
         Scanner keyboard = new Scanner(System.in);
+        Scanner petInfo = new Scanner(System.in);
 
         System.out.println("Welcome to the Client List");
         boolean done = false;
@@ -96,8 +97,9 @@ public class ClientList {
             System.out.println("Would you like to :");
             System.out.println("  1. View contents of Client List");
             System.out.println("  2. Search for a pet");
-            System.out.println("  3. Remove a pet");
-            System.out.println("  4.  Exit");
+            System.out.println("  3. Add a pet");
+            System.out.println("  4. Remove a pet");
+            System.out.println("  5. Exit");
             String tp = keyboard.nextLine();
             int userInput = Integer.parseInt(tp);
             if (userInput == 1) {
@@ -113,15 +115,55 @@ public class ClientList {
                 }
             } else if (userInput == 3) {
                 System.out.println("Please enter pet name");
-                String id2 = keyboard.nextLine();
-                myClientList.removeItem(id2);
+                String petName = petInfo.nextLine();
+                System.out.println("Please enter pet owner's name");
+                String petOwner = petInfo.nextLine();
+                System.out.println("Please enter pet age");
+                int petAge = Integer.parseInt(petInfo.nextLine());
+                System.out.println("What kind of pet is it?");
+                String petType = petInfo.nextLine();
+
+                if (petType.equalsIgnoreCase("Dog")) {
+                    System.out.println("What is the breed?");
+                    String dogBreed = petInfo.nextLine();
+                    System.out.println("What is their hair color?");
+                    String dogColor = petInfo.nextLine();
+                    Dog dog = new Dog(petType, petName, petOwner, petAge, dogBreed, dogColor);
+                    myClientList.addItem(dog);
+                } else if (petType.equalsIgnoreCase("Cat")) {
+                    boolean catHair = false;
+                    boolean catClaw = false;
+                    System.out.println("Do they have long hair?");
+                    if (petInfo.nextLine().equalsIgnoreCase("yes")) {
+                        catHair = true;
+                    }
+                    System.out.println("Have they been declawed?");
+                    if (petInfo.nextLine().equalsIgnoreCase("no"))
+                        catClaw = true;
+                    System.out.println("What is their hair color?");
+                    String catColor = petInfo.nextLine();
+                    Cat cat = new Cat(petType, petName, petOwner, petAge, catHair, catClaw, catColor);
+                    myClientList.addItem(cat);
+                } else {
+                    boolean petHandle = false;
+                    System.out.println("Do they require special handling?");
+                    if (petInfo.nextLine().equalsIgnoreCase("yes")) {
+                        petHandle = true;
+                    }
+                    Other otherPet = new Other("other", petName, petOwner, petAge, petHandle, petType);
+                    myClientList.addItem(otherPet);
+                }
+            } else if (userInput == 4) {
+                System.out.println("Please enter pet name");
+                String id3 = keyboard.nextLine();
+                myClientList.removeItem(id3);
             } else {
                 done = true;
                 // write out contents of ClientList back to original file
                 PrintWriter out = null;
                 // open file for writing
                 try {
-                    out = new PrintWriter(new File("Week_1/pets.txt"));
+                    out = new PrintWriter(new File("C:\\Users\\kevin\\IntelliJIDEAProjects\\ITEC3150\\src\\Week_1\\pets.txt"));
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -227,7 +269,7 @@ public class ClientList {
      * <p>
      * This method removes the item with id from the array list
      *
-     * @param m
+     * @param
      */
     public void removeItem(String name) {
         Pet g = this.searchByName(name);
@@ -235,5 +277,4 @@ public class ClientList {
             clientListItems.remove(g);
         }
     }
-
 }
