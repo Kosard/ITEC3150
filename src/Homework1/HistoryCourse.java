@@ -18,4 +18,12 @@ public class HistoryCourse extends Course {
         this.areaE_Eligible = eligible;
         this.courseType = type;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " HistoryCourse {" +
+                "areaE_Eligible=" + areaE_Eligible +
+                ", courseType=" + courseType +
+                '}';
+    }
 }

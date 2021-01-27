@@ -18,10 +18,19 @@ public class EnglishCourse extends Course {
     }
 
     public EnglishCourse(int crn, String name, String category, String attribute,
-                         boolean reading, boolean writing) {
+                         boolean writing, boolean reading) {
         super(crn, name, category);
         this.cAttribute = attribute;
         this.hasWriting = writing;
         this.hasReading = reading;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " EnglishCourse {" +
+                "hasWriting=" + hasWriting +
+                ", hasReading=" + hasReading +
+                ", cAttribute=" + cAttribute +
+                '}';
     }
 }

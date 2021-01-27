@@ -22,4 +22,13 @@ public class Course {
         this.courseName = name;
         this.courseCategory = category;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "Crn=" + courseCrn +
+                ", Name=" + courseName +
+                ", Category=" + courseCategory +
+                '}';
+    }
 }

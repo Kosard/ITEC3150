@@ -17,4 +17,12 @@ public class MathCourse extends Course {
         this.isSTEM = stem;
         this.courseType = type;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " MathCourse {" +
+                "isSTEM=" + isSTEM +
+                ", courseType=" + courseType +
+                '}';
+    }
 }
