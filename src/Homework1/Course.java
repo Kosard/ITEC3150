@@ -3,7 +3,7 @@ package Homework1;
 public class Course {
     private int courseCrn;
     private String courseName;
-    private String courseCategory;
+    private String courseDiscipline;
 
     public int getCourseCrn() {
         return courseCrn;
@@ -13,22 +13,22 @@ public class Course {
         return courseName;
     }
 
-    public String getCourseCategory() {
-        return courseCategory;
-    }
-
     public Course(int crn, String name, String category) {
         this.courseCrn = crn;
         this.courseName = name;
-        this.courseCategory = category;
+        this.courseDiscipline = category;
+    }
+
+    public String getCourseDiscipline() {
+        return courseDiscipline;
     }
 
     @Override
     public String toString() {
         return "Course{" +
-                "Crn=" + courseCrn +
+                "CRN=" + courseCrn +
                 ", Name=" + courseName +
-                ", Category=" + courseCategory +
+                ", Discipline=" + courseDiscipline +
                 '}';
     }
 }

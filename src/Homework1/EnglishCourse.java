@@ -3,7 +3,7 @@ package Homework1;
 public class EnglishCourse extends Course {
     boolean hasWriting;
     boolean hasReading;
-    private String cAttribute;
+    private String classification;
 
     public boolean hasWriting() {
         return hasWriting;
@@ -13,24 +13,24 @@ public class EnglishCourse extends Course {
         return hasReading;
     }
 
-    public String getAttribute() {
-        return cAttribute;
-    }
-
-    public EnglishCourse(int crn, String name, String category, String attribute,
+    public EnglishCourse(int crn, String name, String category, String classification,
                          boolean writing, boolean reading) {
         super(crn, name, category);
-        this.cAttribute = attribute;
+        this.classification = classification;
         this.hasWriting = writing;
         this.hasReading = reading;
+    }
+
+    public String getClassification() {
+        return classification;
     }
 
     @Override
     public String toString() {
         return super.toString() + " EnglishCourse {" +
-                "hasWriting=" + hasWriting +
-                ", hasReading=" + hasReading +
-                ", cAttribute=" + cAttribute +
+                "has Writing=" + hasWriting +
+                ", has Reading=" + hasReading +
+                ", Classification=" + classification +
                 '}';
     }
 }
