@@ -6,9 +6,24 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class: CourseList
+ *
+ * @author Kevin Figueroa
+ * @version 1.0
+ * Course: ITEC 3150 Spring 2021
+ * Written: January 23, 2021
+ * <p>
+ * This class
+ * <p>
+ * Purpose:
+ */
 public class CourseList {
     private ArrayList<Course> courseListItems = new ArrayList<>();
 
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         CourseList courseList = new CourseList();
 
@@ -34,7 +49,6 @@ public class CourseList {
                 EnglishCourse engl = new EnglishCourse(crn, name, disc, classification, writ, read);
                 courseList.addCourse(engl);
             } else if (disc.equalsIgnoreCase("Math")) {
-                System.out.println("Is it STEM related?");
                 String temp = courseReader.nextLine();
                 boolean stem = Boolean.parseBoolean(temp);
                 String type = courseReader.nextLine();
@@ -187,16 +201,35 @@ public class CourseList {
         }
     }
 
+    /**
+     * Method: getCourseListItems()
+     * This method returns the arraylist attribute of the courseList class
+     *
+     * @return arraylist attribute
+     */
     public ArrayList<Course> getCourseListItems() {
         return courseListItems;
     }
 
+    /**
+     * Method: printCourseListItems()
+     * This method prints each individual course object to the console
+     */
     public void printCourseListItems() {
         for (Course cs : courseListItems) {
             System.out.println(cs);
         }
     }
 
+    /**
+     * Method: searchCourse()
+     * This method looks through the current list of course objects and returns a
+     * specific course object if its crn attribute matches the input parameter crn.
+     * It returns null otherwise.
+     *
+     * @param crn crn of the course to be searched
+     * @return the matched course or null if none found
+     */
     public Course searchCourse(int crn) {
         Course currentCourse = null;
         for (Course course : courseListItems) {
@@ -207,6 +240,15 @@ public class CourseList {
         return currentCourse;
     }
 
+    /**
+     * Method: searchCourse()
+     * This method looks through the current list of course objects and returns a
+     * specific course object if its name attribute matches the input parameter name.
+     * It returns null otherwise.
+     *
+     * @param name name of the course to be searched
+     * @return the matched course or null if none found
+     */
     public Course searchCourse(String name) {
         Course currentCourse = null;
         for (Course course : courseListItems) {
@@ -217,27 +259,43 @@ public class CourseList {
         return currentCourse;
     }
 
-    public void addCourse(Course cs) {
-        courseListItems.add(cs);
+    /**
+     * Method: addCourse()
+     * This method calls the arraylist's add() method in order add a course to the arraylist
+     *
+     * @param course course object that will be added to the arraylist
+     */
+    public void addCourse(Course course) {
+        courseListItems.add(course);
     }
 
+    /**
+     * Method: removeCourse()
+     * This method removes a course object using the CRN by calling the
+     * searchCourse() method and the arraylist's remove() method
+     *
+     * @param crn crn of the course that is to be removed
+     */
     public void removeCourse(int crn) {
-//        for (int i = 0; i < courseListItems.size(); i++) {
-//            Course currentCourse = courseListItems.get(i);
-//            if (currentCourse.getCourseCrn() == crn){
-//                courseListItems.remove(currentCourse);
-//            }
-//        }
         Course currentCourse = searchCourse(crn);
         courseListItems.remove(currentCourse);
     }
 
+    /**
+     * Method: removeCourse()
+     * This method removes a course object using its name by calling the
+     * searchCourse() method and the arraylist's remove() method
+     *
+     * @param name name of the course that is to be removed
+     */
     public void removeCourse(String name) {
-        for (int i = 0; i < courseListItems.size(); i++) {
-            Course currentCourse = courseListItems.get(i);
-            if (currentCourse.getCourseName().equalsIgnoreCase(name)) {
-                courseListItems.remove(currentCourse);
-            }
-        }
+//        for (int i = 0; i < courseListItems.size(); i++) {
+//            Course currentCourse = courseListItems.get(i);
+//            if (currentCourse.getCourseName().equalsIgnoreCase(name)) {
+//                courseListItems.remove(currentCourse);
+//            }
+//        }
+        Course currentCourse = searchCourse(name);
+        courseListItems.remove(currentCourse);
     }
 }
