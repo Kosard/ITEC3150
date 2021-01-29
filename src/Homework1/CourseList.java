@@ -14,20 +14,36 @@ import java.util.Scanner;
  * Course: ITEC 3150 Spring 2021
  * Written: January 23, 2021
  * <p>
- * This class
+ * This class describes CourseList used to contain the Course item CourseList. It
+ * also contains the main method which starts the program.
  * <p>
- * Purpose:
+ * Purpose: Methods and attributes needed to create a CourseList of Course class
+ * items. Print them, read them from a file, search for a specific crn or name,
+ * remove and add a new course.
  */
 public class CourseList {
     private ArrayList<Course> courseListItems = new ArrayList<>();
 
     /**
+     * Method:main()
+     * <p>
+     * This method is the starting point of the program. It contains the initial
+     * reading of items from the text file courses.txt and a menu for allowing user
+     * to choose various tasks.
+     *
      * @param args
      */
     public static void main(String[] args) {
+        // create CourseList by reading in from text file named courses.txt
+
         CourseList courseList = new CourseList();
 
+        // open text file
+
         File courseFile = new File("C:\\Users\\kevin\\IntelliJIDEAProjects\\ITEC3150\\src\\Homework1\\courses.txt");
+
+        // open a scanner to read data from file
+
         Scanner courseReader = null;
         try {
             courseReader = new Scanner(courseFile);
@@ -35,35 +51,39 @@ public class CourseList {
             System.out.println("No such file exists or the list is empty");
         }
 
-        while (courseReader != null && courseReader.hasNext()) {
-            String disc = courseReader.nextLine();
-            int crn = Integer.parseInt(courseReader.nextLine());
-            String name = courseReader.nextLine();
+        // read one course at a time
 
-            if (disc.equalsIgnoreCase("English")) {
+        while (courseReader != null && courseReader.hasNext()) {
+            String discipline = courseReader.nextLine();
+            int crn = Integer.parseInt(courseReader.nextLine());
+            String courseName = courseReader.nextLine();
+
+            if (discipline.equalsIgnoreCase("English")) {
                 String classification = courseReader.nextLine();
                 String temp = courseReader.nextLine();
                 boolean writ = Boolean.parseBoolean(temp);
                 temp = courseReader.nextLine();
                 boolean read = Boolean.parseBoolean(temp);
-                EnglishCourse engl = new EnglishCourse(crn, name, disc, classification, writ, read);
+                EnglishCourse engl = new EnglishCourse(crn, courseName, discipline, classification, writ, read);
                 courseList.addCourse(engl);
-            } else if (disc.equalsIgnoreCase("Math")) {
+            } else if (discipline.equalsIgnoreCase("Math")) {
                 String temp = courseReader.nextLine();
                 boolean stem = Boolean.parseBoolean(temp);
                 String type = courseReader.nextLine();
-                MathCourse math = new MathCourse(crn, name, disc, stem, type);
+                MathCourse math = new MathCourse(crn, courseName, discipline, stem, type);
                 courseList.addCourse(math);
-            } else if (disc.equalsIgnoreCase("History")) {
+            } else if (discipline.equalsIgnoreCase("History")) {
                 String temp = courseReader.nextLine();
                 boolean areaE = Boolean.parseBoolean(temp);
                 String type = courseReader.nextLine();
-                HistoryCourse hist = new HistoryCourse(crn, name, disc, areaE, type);
+                HistoryCourse hist = new HistoryCourse(crn, courseName, discipline, areaE, type);
                 courseList.addCourse(hist);
             } else {
-                System.out.println("Unknown course discipline " + disc);
+                System.out.println("Unknown course discipline " + discipline);
             }
         }
+
+        // open a scanner to read user input to navigate menu
 
         Scanner menuScan = new Scanner(System.in);
 
@@ -82,7 +102,10 @@ public class CourseList {
             if (menuNum == 1) {
                 courseList.printCourseListItems();
             } else if (menuNum == 2) {
+                //open a scanner for searching, returns a null course if none found
+
                 Scanner searchScanner = new Scanner(System.in);
+
                 Course course;
                 System.out.println("Search by CRN?");
                 if (searchScanner.nextLine().equalsIgnoreCase("yes")) {
@@ -101,52 +124,54 @@ public class CourseList {
                     System.out.println("Course was not found");
                 }
             } else if (menuNum == 3) {
+                // open a scanner for adding a course
                 Scanner addScanner = new Scanner(System.in);
+
                 System.out.println("What is the discipline of the course?");
-                String disc = addScanner.nextLine();
+                String discipline = addScanner.nextLine();
                 System.out.println("WHat is the CRN of the course?");
                 int crn = Integer.parseInt(addScanner.nextLine());
                 System.out.println("What is the name of the course?");
-                String name = addScanner.nextLine();
-                if (disc.equalsIgnoreCase("English")) {
+                String courseName = addScanner.nextLine();
+                if (discipline.equalsIgnoreCase("English")) {
                     System.out.println("What is the classification level?");
                     String classification = addScanner.nextLine();
                     System.out.println("Is it a writing course?");
-                    String input1 = addScanner.nextLine();
+                    String userIn1 = addScanner.nextLine();
                     boolean writ = false;
-                    if (input1.equalsIgnoreCase("yes")) {
+                    if (userIn1.equalsIgnoreCase("yes")) {
                         writ = true;
                     }
                     System.out.println("Is it a reading course?");
-                    String input2 = addScanner.nextLine();
+                    String userIn2 = addScanner.nextLine();
                     boolean read = false;
-                    if (input2.equalsIgnoreCase("yes")) {
+                    if (userIn2.equalsIgnoreCase("yes")) {
                         read = true;
                     }
-                    EnglishCourse eng = new EnglishCourse(crn, name, disc, classification,
+                    EnglishCourse eng = new EnglishCourse(crn, courseName, discipline, classification,
                             read, writ);
                     courseList.addCourse(eng);
-                } else if (disc.equalsIgnoreCase("Math")) {
+                } else if (discipline.equalsIgnoreCase("Math")) {
                     System.out.println("Is it STEM related?");
-                    String input1 = addScanner.nextLine();
+                    String userIn = addScanner.nextLine();
                     boolean stem = false;
-                    if (input1.equalsIgnoreCase("yes")) {
+                    if (userIn.equalsIgnoreCase("yes")) {
                         stem = true;
                     }
                     System.out.println("What is the instruction type?");
-                    String type = addScanner.nextLine();
-                    MathCourse math = new MathCourse(crn, name, disc, stem, type);
+                    String insType = addScanner.nextLine();
+                    MathCourse math = new MathCourse(crn, courseName, discipline, stem, insType);
                     courseList.addCourse(math);
                 } else {
                     System.out.println("Is it Area E eligible?");
-                    String input1 = addScanner.nextLine();
+                    String userIn = addScanner.nextLine();
                     boolean areaE = false;
-                    if (input1.equalsIgnoreCase("yes")) {
+                    if (userIn.equalsIgnoreCase("yes")) {
                         areaE = true;
                     }
                     System.out.println("Is it recorded, online, or in-person?");
-                    String type = addScanner.nextLine();
-                    HistoryCourse hist = new HistoryCourse(crn, name, disc, areaE, type);
+                    String insType = addScanner.nextLine();
+                    HistoryCourse hist = new HistoryCourse(crn, courseName, discipline, areaE, insType);
                     courseList.addCourse(hist);
                 }
             } else if (menuNum == 4) {
@@ -166,7 +191,13 @@ public class CourseList {
                 }
             } else {
                 done = true;
+
+                // write out the contents of CourseList back to original file
+
                 PrintWriter output = null;
+
+                // open file for writing
+
                 try {
                     output = new PrintWriter("C:\\Users\\kevin\\IntelliJIDEAProjects\\ITEC3150\\src\\" +
                             "Homework1\\courses.txt");
@@ -174,22 +205,41 @@ public class CourseList {
                     e.printStackTrace();
                 }
 
+                // write contents of each CourseList item to text file
+
                 for (Course course : courseList.getCourseListItems()) {
+                    // write the attributes common to all courses
+
                     output.println(course.getCourseDiscipline());
                     output.println(course.getCourseCrn());
                     output.println(course.getCourseName());
 
                     if (course.getCourseDiscipline().equalsIgnoreCase("English")) {
+                        // cast to appropriate subclass
+
                         EnglishCourse engl = (EnglishCourse) course;
+
+                        // write attributes specific to english course
+
                         output.println(engl.getClassification());
                         output.println(engl.hasWriting());
                         output.println(engl.hasReading());
                     } else if (course.getCourseDiscipline().equalsIgnoreCase("Math")) {
+                        // cast to appropriate subclass
+
                         MathCourse math = (MathCourse) course;
+
+                        // write attributes specific to math course
+
                         output.println(math.isSTEM());
                         output.println(math.getInstructionType());
                     } else if (course.getCourseDiscipline().equalsIgnoreCase("History")) {
+                        // cast to appropriate subclass
+
                         HistoryCourse hist = (HistoryCourse) course;
+
+                        // write attributes specific to history course
+
                         output.println(hist.isAreaE_Eligible());
                         output.println(hist.getInstructionType());
                     } else {

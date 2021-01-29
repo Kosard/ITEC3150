@@ -1,5 +1,18 @@
 package Homework1;
 
+/**
+ * Class: MathCourse
+ *
+ * @author Kevin Figueroa
+ * @version 1.0
+ * Course: ITEC 3150 Spring 2021
+ * Written: January 23, 2021
+ * <p>
+ * This class describes a subclass of Course called MathCourse.
+ * <p>
+ * Purpose: Contains the attributes specific to a type of Course called MathCourse.
+ */
+
 public class MathCourse extends Course {
     private boolean isSTEM;
     private String instructionType;
@@ -21,8 +34,8 @@ public class MathCourse extends Course {
     @Override
     public String toString() {
         return super.toString() + " MathCourse {" +
-                "isSTEM=" + isSTEM +
-                ", Instruction Type=" + instructionType +
+                " isSTEM = " + isSTEM +
+                ", Instruction Type = " + instructionType +
                 '}';
     }
 }
