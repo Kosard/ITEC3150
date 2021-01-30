@@ -109,8 +109,6 @@ public class CourseList {
 
                 Scanner searchScanner = new Scanner(System.in);
                 Course course;
-                int crit;
-
 
                 System.out.println("Search by:");
                 System.out.println("1) Name?");
@@ -388,12 +386,6 @@ public class CourseList {
      * @param name name of the course that is to be removed
      */
     public void removeCourse(String name) {
-//        for (int i = 0; i < courseListItems.size(); i++) {
-//            Course currentCourse = courseListItems.get(i);
-//            if (currentCourse.getCourseName().equalsIgnoreCase(name)) {
-//                courseListItems.remove(currentCourse);
-//            }
-//        }
         Course currentCourse = searchCourse(name);
         courseListItems.remove(currentCourse);
     }
