@@ -192,7 +192,7 @@ public class CourseList {
                     courseList.addCourse(math);
                 } else if (discipline.equalsIgnoreCase("History")) {
                     System.out.println("Is it Area E eligible?");
-                    String userIn = addScanner.next();
+                    String userIn = addScanner.nextLine();
                     boolean areaE = false;
 
                     if (userIn.equalsIgnoreCase("yes")) {
