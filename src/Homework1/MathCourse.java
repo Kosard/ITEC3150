@@ -34,7 +34,7 @@ public class MathCourse extends Course {
     @Override
     public String toString() {
         return super.toString() + " MathCourse {" +
-                " isSTEM = " + isSTEM +
+                "isSTEM = " + isSTEM +
                 ", Instruction Type = " + instructionType +
                 '}';
     }

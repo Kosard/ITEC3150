@@ -40,7 +40,7 @@ public class Course {
     @Override
     public String toString() {
         return "Course {" +
-                " CRN = " + courseCrn +
+                "CRN = " + courseCrn +
                 ", Name = " + courseName +
                 ", Discipline = " + courseDiscipline +
                 '}';

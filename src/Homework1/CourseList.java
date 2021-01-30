@@ -114,14 +114,17 @@ public class CourseList {
                 System.out.println("Search by:");
                 System.out.println("1) Name?");
                 System.out.println("2) CRN?");
-                int typeCriteria = 0;
+                int typeCriteria;
 
-                try {
-                    typeCriteria = searchScanner.nextInt();
-                } catch (InputMismatchException e) {
-                    while (!searchScanner.hasNextInt()) {
-                        System.out.println("Not a number. Try again:");
+                //input validation loop
+
+                while (true) {
+                    try {
                         typeCriteria = searchScanner.nextInt();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Not a valid option! Try again:");
+                        searchScanner.nextLine();
                     }
                 }
 
@@ -190,7 +193,7 @@ public class CourseList {
                     courseList.addCourse(math);
                 } else {
                     System.out.println("Is it Area E eligible?");
-                    String userIn = addScanner.nextLine();
+                    String userIn = addScanner.next();
                     boolean areaE = false;
 
                     if (userIn.equalsIgnoreCase("yes")) {
@@ -210,7 +213,19 @@ public class CourseList {
                 System.out.println("Remove by:");
                 System.out.println("1) Name?");
                 System.out.println("2) CRN?");
-                int typeCriteria = removeScanner.nextInt();
+                int typeCriteria;
+
+                //input validation loop
+
+                while (true) {
+                    try {
+                        typeCriteria = removeScanner.nextInt();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Not a valid option! Try again:");
+                        removeScanner.nextLine();
+                    }
+                }
 
                 if (typeCriteria == 1) {
                     System.out.println("Please enter the name of the course you wish to remove: ");

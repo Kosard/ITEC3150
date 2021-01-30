@@ -40,7 +40,7 @@ public class EnglishCourse extends Course {
     @Override
     public String toString() {
         return super.toString() + " EnglishCourse {" +
-                " hasReading = " + hasReading +
+                "hasReading = " + hasReading +
                 ", hasWriting = " + hasWriting +
                 ", classification = " + classification +
                 '}';

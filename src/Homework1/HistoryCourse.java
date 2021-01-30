@@ -35,7 +35,7 @@ public class HistoryCourse extends Course {
     @Override
     public String toString() {
         return super.toString() + " HistoryCourse {" +
-                " Area E Eligible = " + areaE_Eligible +
+                "Area E Eligible = " + areaE_Eligible +
                 ", Instruction Type = " + instructionType +
                 '}';
     }
