@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -110,32 +109,32 @@ public class CourseList {
 
                 Scanner searchScanner = new Scanner(System.in);
                 Course course;
+                int crit;
+
 
                 System.out.println("Search by:");
                 System.out.println("1) Name?");
                 System.out.println("2) CRN?");
-                int typeCriteria;
+                String typeCriteria = searchScanner.nextLine();
 
                 //input validation loop
 
                 while (true) {
-                    try {
-                        typeCriteria = searchScanner.nextInt();
+                    if (typeCriteria.equalsIgnoreCase("1")) {
+                        System.out.println("Enter the name of the course: ");
+                        String name = searchScanner.nextLine();
+                        course = courseList.searchCourse(name);
                         break;
-                    } catch (InputMismatchException e) {
-                        System.out.println("Not a valid option! Try again:");
-                        searchScanner.nextLine();
                     }
-                }
-
-                if (typeCriteria == 1) {
-                    System.out.println("Enter the name of the course: ");
-                    String name = searchScanner.nextLine();
-                    course = courseList.searchCourse(name);
-                } else {
-                    System.out.println("Enter the CRN of the course: ");
-                    int crn = searchScanner.nextInt();
-                    course = courseList.searchCourse(crn);
+                    if (typeCriteria.equalsIgnoreCase("2")) {
+                        System.out.println("Enter the CRN of the course: ");
+                        int crn = searchScanner.nextInt();
+                        course = courseList.searchCourse(crn);
+                        break;
+                    } else {
+                        System.out.println("Not a valid option! Try again:");
+                        typeCriteria = searchScanner.nextLine();
+                    }
                 }
 
                 if (course != null) {
@@ -150,7 +149,7 @@ public class CourseList {
 
                 System.out.println("What is the discipline of the course?");
                 String discipline = addScanner.nextLine();
-                System.out.println("WHat is the CRN of the course?");
+                System.out.println("What is the CRN of the course?");
                 int crn = Integer.parseInt(addScanner.nextLine());
                 System.out.println("What is the name of the course?");
                 String courseName = addScanner.nextLine();
@@ -191,7 +190,7 @@ public class CourseList {
                     MathCourse math = new MathCourse(crn, courseName, discipline, stem, insType);
 
                     courseList.addCourse(math);
-                } else {
+                } else if (discipline.equalsIgnoreCase("History")) {
                     System.out.println("Is it Area E eligible?");
                     String userIn = addScanner.next();
                     boolean areaE = false;
@@ -204,6 +203,9 @@ public class CourseList {
                     HistoryCourse hist = new HistoryCourse(crn, courseName, discipline, areaE, insType);
 
                     courseList.addCourse(hist);
+                } else {
+                    Course course = new Course(crn, courseName, discipline);
+                    courseList.addCourse(course);
                 }
             } else if (menuNum == 4) {
                 // open a scanner for removing a course
@@ -213,30 +215,28 @@ public class CourseList {
                 System.out.println("Remove by:");
                 System.out.println("1) Name?");
                 System.out.println("2) CRN?");
-                int typeCriteria;
+                String typeCriteria = removeScanner.nextLine();
 
                 //input validation loop
 
                 while (true) {
-                    try {
-                        typeCriteria = removeScanner.nextInt();
+                    if (typeCriteria.equalsIgnoreCase("1")) {
+                        System.out.println("Please enter the name of the course you wish to remove: ");
+                        String courseName = removeScanner.nextLine();
+
+                        courseList.removeCourse(courseName);
                         break;
-                    } catch (InputMismatchException e) {
-                        System.out.println("Not a valid option! Try again:");
-                        removeScanner.nextLine();
                     }
-                }
+                    if (typeCriteria.equalsIgnoreCase("2")) {
+                        System.out.println("Please enter the CRN of the course you wish to remove:");
+                        int crn = removeScanner.nextInt();
 
-                if (typeCriteria == 1) {
-                    System.out.println("Please enter the name of the course you wish to remove: ");
-                    String courseName = removeScanner.nextLine();
-
-                    courseList.removeCourse(courseName);
-                } else {
-                    System.out.println("Please enter the CRN of the course you wish to remove:");
-                    int crn = removeScanner.nextInt();
-
-                    courseList.removeCourse(crn);
+                        courseList.removeCourse(crn);
+                        break;
+                    } else {
+                        System.out.println("Not a valid option! Try again:");
+                        typeCriteria = removeScanner.nextLine();
+                    }
                 }
             } else {
                 done = true;
