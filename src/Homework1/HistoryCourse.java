@@ -1,5 +1,7 @@
 package Homework1;
 
+import java.io.Serializable;
+
 /**
  * Class: HistoryCourse
  *
@@ -13,7 +15,7 @@ package Homework1;
  * Purpose: Contains the attributes specific to a type of Course called HistoryCourse.
  */
 
-public class HistoryCourse extends Course {
+public class HistoryCourse extends Course implements Serializable {
     private boolean areaE_Eligible;
     private String instructionType;
 

@@ -1,5 +1,7 @@
 package Homework1;
 
+import java.io.Serializable;
+
 /**
  * Class: MathCourse
  *
@@ -13,7 +15,7 @@ package Homework1;
  * Purpose: Contains the attributes specific to a type of Course called MathCourse.
  */
 
-public class MathCourse extends Course {
+public class MathCourse extends Course implements Serializable {
     private boolean isSTEM;
     private String instructionType;
 

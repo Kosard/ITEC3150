@@ -1,5 +1,7 @@
 package Homework1;
 
+import java.io.Serializable;
+
 /**
  * Class: Course
  *
@@ -14,7 +16,8 @@ package Homework1;
  * Purpose: This class is intended to serve as a superclass for the different
  * types of Course.
  */
-public class Course {
+public class Course implements Serializable {
+    private static final long serialVersionUID = -1791967859940442392L;
     private int courseCrn;
     private String courseName;
     private String courseDiscipline;
