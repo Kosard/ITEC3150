@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Kevin Figueroa
  * @version 1.0
  * Course: ITEC 3150 Spring 2021
- * Written: January 23, 2021
+ * Written: February 14, 2021
  * <p>
  * This class describes CourseList used to contain the Course item CourseList. It
  * also contains the main method which starts the program.
@@ -296,6 +296,107 @@ public class CourseList {
                 output.close();
             }
         }
+    }
+
+    //Prof method
+    public void readFile() {
+        //open text file
+        File courseFile = new File("courses.txt");
+        //open a Scanner
+        Scanner courseReader = null;
+
+        try {
+            courseReader = new Scanner(courseFile);
+        } catch (FileNotFoundException e) {
+            System.out.println("No courseList Course found or courseList is empty");
+        }
+
+        //read one course at a time
+        while (courseReader != null && courseReader.hasNext()) {
+            String category = courseReader.nextLine();
+            String name = courseReader.nextLine();
+            int crn = Integer.parseInt(courseReader.nextLine());
+
+            if (category.equalsIgnoreCase("English")) {
+                String level = courseReader.nextLine();
+                boolean read = Boolean.parseBoolean(courseReader.nextLine());
+                boolean writ = Boolean.parseBoolean(courseReader.nextLine());
+
+                EnglishCourse engl = new EnglishCourse(crn, name, category, level, read, writ);
+
+                addCourse(engl);
+            } else if (category.equalsIgnoreCase("Math")) {
+                boolean stem = Boolean.parseBoolean(courseReader.nextLine());
+                String format = courseReader.nextLine();
+
+                MathCourse math = new MathCourse(crn, name, category, stem, format);
+
+                addCourse(math);
+            } else if (category.equalsIgnoreCase("History")) {
+                boolean areaE = Boolean.parseBoolean(courseReader.nextLine());
+                String format = courseReader.nextLine();
+
+                HistoryCourse hist = new HistoryCourse(crn, name, category, areaE, format);
+
+                addCourse(hist);
+            } else {
+                System.out.println("Unknown Course type " + category);
+            }
+        }
+    }
+
+    //Prof method
+    public void writeFile() {
+        PrintWriter out = null;
+
+        //open file
+        try {
+            out = new PrintWriter(new File("courses.txt"));
+
+            //write contents of each courseList item to file
+            for (Course c : getCourseListItems()) {
+                //write first attributes common to all
+                out.println(c.getCourseDiscipline());
+                out.println(c.getCourseName());
+                out.println(c.getCourseCrn());
+
+                if (c.getCourseDiscipline().equalsIgnoreCase("History")) {
+                    //cast to appropriate subclass
+                    HistoryCourse hist = (HistoryCourse) c;
+                    //write att specific to Hist
+                    out.println(hist.isAreaE_Eligible());
+                    out.println(hist.getInstructionType());
+                } else if (c.getCourseDiscipline().equalsIgnoreCase("Math")) {
+                    //cast to apropos subclass
+                    MathCourse math = (MathCourse) c;
+                    //write atts specific to Math
+                    out.println(math.isSTEM());
+                    out.println(math.getInstructionType());
+                } else if (c.getCourseDiscipline().equalsIgnoreCase("English")) {
+                    EnglishCourse engl = (EnglishCourse) c;
+                    out.println(engl.getClassification());
+                    out.println(engl.hasReading());
+                    out.println(engl.hasWriting());
+                } else {
+                    System.out.println("Unknown Course type " + c.getCourseDiscipline());
+                }
+            }
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Prof method
+    public void menu() {
+        System.out.println("Welcome to your Course List!");
+        System.out.println("Would you like to:");
+        System.out.println("1) View the current list?");
+        System.out.println("2) Search for a course on your list?");
+        System.out.println("3) Add a course to your list?");
+        System.out.println("4) Remove a course from your list?");
+        System.out.println("5) Exit");
+
     }
 
     /**
