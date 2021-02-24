@@ -4,46 +4,91 @@ import Homework1.EnglishCourse;
 import Homework1.HistoryCourse;
 import Homework1.MathCourse;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
 
+/**
+ * Class: ConvertTextToBinary
+ *
+ * @author Kevin Figueroa
+ * @version 1.0
+ * Course: ITEC 3150 Spring 2021
+ * Written: February 14, 2021
+ * <p>
+ * This is a driver class, which means it contains the main that will do the conversion from text to binary.
+ * <p>
+ * Purpose: This class reads from a selected text file. As it reads from the text file, it will write object data into
+ * a binary file, thus converting it from a text to binary file.
+ */
 public class ConvertTextToBinary {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        try (
-                ObjectInputStream inputStream = new ObjectInputStream(
-                        new FileInputStream("C:\\Users\\kevin\\IntelliJIDEAProjects\\ITEC3150\\src\\Homework1\\courses.txt"));
+    /**
+     * The main method calls the convertFile() method, which is the one that is doing the conversion
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        //Call to method that converts the text file to binary
+        convertFile();
+    }
 
-                ObjectOutputStream outputStream = new ObjectOutputStream(
-                        new FileOutputStream("courses.dat"))
-        ) {
-            while (true) {
-                String courseDiscipline = inputStream.readUTF();
-                int courseCRN = inputStream.read();
-                String courseName = inputStream.readUTF();
+    /**
+     * This method reads from a predetermined text file location and then writes it as a binary (.dat) file, thus
+     * converting it from text to binary.
+     */
+    public static void convertFile() {
+        try {
+            //Opening Reader and Output streams
+            FileReader fr = new FileReader("C:\\Users\\kevin\\IntelliJIDEAProjects\\ITEC3150\\src\\Homework1\\courses.txt");
+            BufferedReader bf = new BufferedReader(fr);
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    new FileOutputStream("courses.dat"));
+
+            //Iterate through each line of the text file
+            while (bf.ready()) {
+                //Store attributes common to all Courses
+                String courseDiscipline = bf.readLine();
+                int courseCRN = Integer.parseInt(bf.readLine());
+                String courseName = bf.readLine();
 
                 if (courseDiscipline.equalsIgnoreCase("English")) {
-                    String classification = inputStream.readUTF();
-                    String temp = inputStream.readUTF();
+                    //Store attributes specific to English Course
+                    String classification = bf.readLine();
+                    String temp = bf.readLine();
                     boolean read = Boolean.parseBoolean(temp);
-                    temp = inputStream.readUTF();
+                    temp = bf.readLine();
                     boolean writ = Boolean.parseBoolean(temp);
 
-                    outputStream.writeObject(new EnglishCourse(courseCRN, courseName, courseDiscipline, classification, read, writ));
+                    //Write English object to binary file
+                    oos.writeObject(new EnglishCourse(courseCRN, courseName, courseDiscipline, classification, read, writ));
                 }
 
                 if (courseDiscipline.equalsIgnoreCase("Math")) {
-                    String temp = inputStream.readUTF();
+                    //Store attributes specific to Math Course
+                    String temp = bf.readLine();
                     boolean stem = Boolean.parseBoolean(temp);
-                    String type = inputStream.readUTF();
+                    String type = bf.readLine();
 
-                    outputStream.writeObject(new MathCourse(courseCRN, courseName, courseDiscipline, stem, type));
+                    //Write Math object to binary file
+                    oos.writeObject(new MathCourse(courseCRN, courseName, courseDiscipline, stem, type));
                 } else if (courseDiscipline.equalsIgnoreCase("History")) {
-                    String temp = inputStream.readUTF();
+                    //Store attributes specific to History Course
+                    String temp = bf.readLine();
                     boolean areaE = Boolean.parseBoolean(temp);
-                    String type = inputStream.readUTF();
+                    String type = bf.readLine();
 
-                    outputStream.writeObject(new HistoryCourse(courseCRN, courseName, courseDiscipline, areaE, type));
+                    //Write History object to binary file
+                    oos.writeObject(new HistoryCourse(courseCRN, courseName, courseDiscipline, areaE, type));
                 }
             }
+            //Closing the streams
+            fr.close();
+            bf.close();
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
