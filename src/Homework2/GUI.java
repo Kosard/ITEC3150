@@ -37,7 +37,7 @@ import java.util.ArrayList;
  */
 public class GUI extends Application {
     //actual courseList data
-    private ArrayList<Course> courseList = readFile();
+    private ArrayList<Course> courseList = readBinaryFile();
 
     /**
      * This method makes the program easier to run.
@@ -195,7 +195,7 @@ public class GUI extends Application {
      *
      * @return an arraylist object containing Course data
      */
-    public ArrayList<Course> readFile() {
+    public ArrayList<Course> readBinaryFile() {
         //Create an arraylist to store course data
         ArrayList<Course> courseList = new ArrayList<>();
 

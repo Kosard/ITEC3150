@@ -1,14 +1,9 @@
 package Homework2;
 
-import Homework1.EnglishCourse;
-import Homework1.HistoryCourse;
-import Homework1.MathCourse;
+import Homework1.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Class: ConvertTextToBinary
@@ -24,31 +19,32 @@ import java.io.FileOutputStream;
  * a binary file, thus converting it from a text to binary file.
  */
 public class ConvertTextToBinary {
+    private ArrayList<Course> courseList = new ArrayList<>();
     /**
      * The main method calls the convertFile() method, which is the one that is doing the conversion
      *
      * @param args
      */
     public static void main(String[] args) {
-        //Call to method that converts the text file to binary
-        convertFile();
+        //Create converter object
+        ConvertTextToBinary converter = new ConvertTextToBinary();
+
+        //method call to read text file without Scanner
+        converter.readTextFile();
+
+        //method call to write binary data
+        converter.writeBinaryFile();
     }
 
-    /**
-     * This method reads from a predetermined text file location and then writes it as a binary (.dat) file, thus
-     * converting it from text to binary.
-     */
-    public static void convertFile() {
-        try {
-            //Opening Reader and Output streams
-            FileReader fr = new FileReader("C:\\Users\\kevin\\IntelliJIDEAProjects\\ITEC3150\\src\\Homework1\\courses.txt");
-            BufferedReader bf = new BufferedReader(fr);
-            ObjectOutputStream oos = new ObjectOutputStream(
-                    new FileOutputStream("courses.dat"));
+    public void readTextFile() {
+        FileReader fr;
+        BufferedReader bf;
 
-            //Iterate through each line of the text file
+        try {
+            fr = new FileReader("C:\\Users\\kevin\\IntelliJIDEAProjects\\ITEC3150\\src\\Homework1\\courses.txt");
+            bf = new BufferedReader(fr);
+
             while (bf.ready()) {
-                //Store attributes common to all Courses
                 String courseDiscipline = bf.readLine();
                 int courseCRN = Integer.parseInt(bf.readLine());
                 String courseName = bf.readLine();
@@ -61,8 +57,8 @@ public class ConvertTextToBinary {
                     temp = bf.readLine();
                     boolean writ = Boolean.parseBoolean(temp);
 
-                    //Write English object to binary file
-                    oos.writeObject(new EnglishCourse(courseCRN, courseName, courseDiscipline, classification, read, writ));
+                    //store in temporary list
+                    courseList.add(new EnglishCourse(courseCRN, courseName, courseDiscipline, classification, read, writ));
                 }
 
                 if (courseDiscipline.equalsIgnoreCase("Math")) {
@@ -71,22 +67,36 @@ public class ConvertTextToBinary {
                     boolean stem = Boolean.parseBoolean(temp);
                     String type = bf.readLine();
 
-                    //Write Math object to binary file
-                    oos.writeObject(new MathCourse(courseCRN, courseName, courseDiscipline, stem, type));
+                    courseList.add(new MathCourse(courseCRN, courseName, courseDiscipline, stem, type));
+
+
                 } else if (courseDiscipline.equalsIgnoreCase("History")) {
                     //Store attributes specific to History Course
                     String temp = bf.readLine();
                     boolean areaE = Boolean.parseBoolean(temp);
                     String type = bf.readLine();
 
-                    //Write History object to binary file
-                    oos.writeObject(new HistoryCourse(courseCRN, courseName, courseDiscipline, areaE, type));
+                    courseList.add(new HistoryCourse(courseCRN, courseName, courseDiscipline, areaE, type));
                 }
             }
             //Closing the streams
             fr.close();
             bf.close();
-            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeBinaryFile() {
+        ObjectOutputStream oos;
+
+        try {
+            oos = new ObjectOutputStream(
+                    new FileOutputStream("courses.dat"));
+
+            for (Course c : courseList) {
+                oos.writeObject(c);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
