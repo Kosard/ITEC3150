@@ -1,4 +1,4 @@
-package Week_6;
+package Week_7;
 
 /**
  * Class: Sync_KevinF
