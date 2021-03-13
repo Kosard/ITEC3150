@@ -7,24 +7,29 @@ package Homework3;
  * @version 1.0
  * Course: ITEC 3150 Spring 2021
  * Date Written: 3/10/2021
- * <p>
- * This class: now describe what the class does
- * <p>
- * Purpose: Describe the purpose of this class
+ *
+ * This class implements Runnable, which means that it will play a role in the creation of threads.
+ *
+ * Purpose: To implement the logic behind a single add task
  */
 public class AddRunnable implements Runnable {
-    ArraySumHolder holder;
-    double[] array;
+    //Reference to other class
+    private ArraySumHolder holder;
+    //Temporary variable
+    private double[] array;
 
+    //Constructor
     public AddRunnable(ArraySumHolder holder, double[] array) {
         this.holder = holder;
         this.array = array;
     }
 
+    /**
+     * This method will execute when a thread is created
+     */
     @Override
     public void run() {
-        //long threadID = Thread.currentThread().getId();
+        //call to other class's method
         holder.addElements(array);
-        //System.out.println("Current sum: " + holder.getSum() + " . ThreadID: " + threadID + " .");
     }
 }

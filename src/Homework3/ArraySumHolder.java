@@ -6,30 +6,40 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Class:
+ * Class: ArraySumHolder
  *
  * @author Kevin Figueroa
  * @version 1.0
  * Course: ITEC 3150 Spring 2021
  * Date Written: March 3, 2021
  * <p>
- * This class: now describe what the class does
+ * This class contains important fields such as the sum and arrays that will be used later when launching threads.
  * <p>
- * Purpose: Describe the purpose of this class
+ * Purpose: To create a foundation of fields and methods in order to reference them in the driver class.
  */
 public class ArraySumHolder {
+    //Constants for calculations
     private final int NUM_OF_ARRAYS = 1000000;
     private final int BIG_ARRAY_SIZE = 9000000;
+
+    //Lock for synchronizing threads
     private final Lock lock = new ReentrantLock();
+
+    //Total sum field
     private double sum = 0;
+    //9m doubles array field
     private double[] bigArray;
+
+    //2D array to hold the pieces of the big array
     private double[][] splitArray;
 
+    //Constructor
     public ArraySumHolder() {
         bigArray = createRandomArray();
         splitArray = splitBigArray(bigArray, NUM_OF_ARRAYS);
     }
 
+    //Getters
     public double[][] getSplitArray() {
         return splitArray;
     }
@@ -39,28 +49,50 @@ public class ArraySumHolder {
     }
 
     public double getSum() {
-        return sum;
+        DecimalFormat df = new DecimalFormat("#.##");
+        return Double.parseDouble(df.format(sum));
     }
 
+    //Setter
     public void setSum(double sum) {
         this.sum = sum;
     }
 
-    public double[] createRandomArray() {
-        double[] array = new double[BIG_ARRAY_SIZE];
-        Random rand = new Random();
-        DecimalFormat df = new DecimalFormat("#.##");
 
+    /**
+     * This method creates an array of random doubles from 0 to 100
+     *
+     * @return an array of random doubles
+     */
+    public double[] createRandomArray() {
+        //Set array size according to field
+        double[] array = new double[BIG_ARRAY_SIZE];
+
+        //Create random number generator
+        Random rand = new Random();
+
+        //Add random doubles to the array
         for (int i = 0; i < array.length; i++) {
-            //array[i] = Double.parseDouble(df.format(rand.nextDouble() * 100 + 1));
-            array[i] = i;
+            array[i] = (rand.nextDouble() * 100 + 1);
         }
         return array;
     }
 
-    public double[][] splitBigArray(double[] bigArray, int numOfArray) { //4
-        int numOfElements = bigArray.length / numOfArray; //6
-        double[][] arrArr = new double[numOfArray][numOfElements]; //4 rows and 1 column
+    /**
+     * This method splits an array into several mini arrays
+     *
+     * @param bigArray   the array to be split
+     * @param numOfArray the number of arrays coming from the big array
+     * @return a 2D array that holds all the split pieces of the big array
+     */
+    public double[][] splitBigArray(double[] bigArray, int numOfArray) {
+        //Store number of elements per array part
+        int numOfElements = bigArray.length / numOfArray;
+
+        //Initialize 2D array
+        double[][] arrArr = new double[numOfArray][numOfElements];
+
+        //Copy parts of the big array into a smaller array several times
         int leftIndex = 0;
         for (int i = 0; i < numOfArray; i++) {
             double[] temp = new double[numOfElements];
@@ -73,15 +105,21 @@ public class ArraySumHolder {
         return arrArr;
     }
 
+    /**
+     * This method adds all the elements of a provided array
+     *
+     * @param array array whose elements will be added together
+     */
     public void addElements(double[] array) {
+        //Lock the resource
         lock.lock();
         try {
+            //Set the sum equal to itself plus the added elements of an array
             for (double j : array) {
-                //System.out.println("Adding " + j + " to array");
-                //sum = sum + j;
                 setSum(getSum() + j);
             }
         } finally {
+            //Release the lock
             lock.unlock();
         }
     }
