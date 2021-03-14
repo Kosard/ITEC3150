@@ -1,6 +1,5 @@
 package Homework3;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -8,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Class: ArraySumHolder
  *
- * @author Kevin Figueroa
+ * @author
  * @version 1.0
  * Course: ITEC 3150 Spring 2021
  * Date Written: March 3, 2021
@@ -49,8 +48,7 @@ public class ArraySumHolder {
     }
 
     public double getSum() {
-        DecimalFormat df = new DecimalFormat("#.##");
-        return Double.parseDouble(df.format(sum));
+        return sum;
     }
 
     //Setter

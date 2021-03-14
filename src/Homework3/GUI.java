@@ -31,9 +31,25 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        ArraySumHolder holder = new ArraySumHolder();
+        final int INCREMENT = holder.getNUM_OF_ARRAYS() / 10;
+
+        double[][] splitArray = holder.getSplitArray();
+        ExecutorService pool = Executors.newFixedThreadPool(10);
+
+        for (int i = 0; i < splitArray.length; i++) {
+            AddRunnable addable = new AddRunnable(holder, splitArray[i]);
+            pool.execute(addable);
+        }
+
+        pool.shutdown();
+
         TextField textField = new TextField("The current sum is...");
         textField.setEditable(false);
-        TextField sumField = new TextField("21");
+        TextField sumField = new TextField();
+        sumField.textProperty().addListener(((observable, oldValue, newValue) -> {
+
+        }));
         sumField.setEditable(false);
 
         HBox hBox = new HBox();
