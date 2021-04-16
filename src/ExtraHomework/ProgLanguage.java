@@ -8,36 +8,54 @@ package ExtraHomework;
  * Course: ITEC 3150 Spring 2021
  * Date Written: 3/13/2021
  * <p>
- * This class: now describe what the class does
+ * This class contains the framework for the Programming Language entries in the dictionary
  * <p>
- * <p>
- * "I worked on the homework assignment alone, using only this semester's course materials." OR  "I/We worked on this homework with [give the names of the people you worked with] and/or referred to [cite any texts, web sites, or other materials not provided as this semester's course materials for ITEC 3150]."
- * <p>
- * Purpose: Describe the purpose of this class
+ * Purpose: Used to create entries in the Dictionary class main method
  */
 public class ProgLanguage {
+    //Private fields for this class
     private String progName;
     private int progRank;
+    private int objectNum;
 
+    //Default constructor
     public ProgLanguage() {
-        progName = "xxxxx";
+        this.progName = "xxxxx";
         progRank = 0;
+        objectNum = 0;
     }
 
-    public ProgLanguage(String name, int rank) {
+    //Constructor
+    public ProgLanguage(int num, String name, int rank) {
+        objectNum = num;
         progName = name;
         progRank = rank;
     }
 
+    /**
+     * This method takes in a string variable and capitalizes the whole word
+     *
+     * @param name String to be capitalized
+     * @return capitalized String
+     */
     public String capitalizeName(String name) {
+        //call to uppercase method
         progName = name.toUpperCase();
         return name.toUpperCase();
     }
 
+    /**
+     * This method gets the first letter of the inputted String
+     *
+     * @param name String variable to extract its first letter from
+     * @return char value containing the first letter of the String
+     */
     public char getFirstLetter(String name) {
+        //call to charAt method
         return name.charAt(0);
     }
 
+    //Getters and Setters
     public String getProgName() {
         return progName;
     }
@@ -54,9 +72,11 @@ public class ProgLanguage {
         this.progRank = progRank;
     }
 
-    public void sortDictionary(ProgLanguage[] dictionary) {
-        for (int i = 0; i < dictionary.length; i++) {
+    public int getObjectNum() {
+        return objectNum;
+    }
 
-        }
+    public void setObjectNum(int objectNum) {
+        this.objectNum = objectNum;
     }
 }
