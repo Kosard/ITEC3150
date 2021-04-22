@@ -14,7 +14,7 @@ package Week_12;
  */
 public class TestBST {
     public static void main(String[] args) {
-        // Create a BST
+        // Create a TEST.BST
         BST<String> tree = new BST<String>();
         tree.insert("George");
         tree.insert("Michael");

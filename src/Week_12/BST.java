@@ -1,7 +1,7 @@
 package Week_12;
 
 /**
- * Class: BST
+ * Class: TEST.BST
  *
  * @author Kevin Figueroa
  * @version 1.0
