@@ -23,16 +23,6 @@ public class BinaryTree {
     private Node root;
     private LinkedList<Word> wordList = new LinkedList<>();
 
-    public static void main(String[] args) {
-        BinaryTree theTree = new BinaryTree();
-
-        theTree.readFile();
-
-        theTree.reverseSort();
-
-        theTree.printLinkedList();
-    }
-
     /**
      * This method calls the sort method from the Collections class. Due to the implementation of the compareTo method
      * in the Word class, the list gets sorted in reverse order (z at the top, a at the bottom)
@@ -63,7 +53,7 @@ public class BinaryTree {
 
         //Try to read text file
         try {
-            in = new Scanner(new File("C:\\Users\\kevin\\IntelliJIDEAProjects\\ITEC3150\\src\\Homework4\\CarlAndTheCottonGin.txt"));
+            in = new Scanner(new File("C:\\Users\\kevin\\IdeaProjects\\ITEC3150\\src\\Homework4\\CarlAndTheCottonGin"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -338,11 +328,6 @@ public class BinaryTree {
             while (true) {
                 parent = focusNode;
 
-                //If key matches with focus Node, add 1 to count
-                if (newNode.data.getaWord().equals(parent.data.getaWord())) {
-                    parent.data.setCount(parent.data.getCount() + 1);
-                    return;
-                }
 
                 //Check if param key is less than the key(word) in focus node
                 if (lowerCased.compareTo(focusNode.data.getaWord()) < 0) {
@@ -358,7 +343,7 @@ public class BinaryTree {
                         list.add(parent.leftChild.data);
                         return;
                     }
-                } else {
+                } else if (lowerCased.compareTo(focusNode.data.getaWord()) > 0){
                     //Focus on right child of current Node
                     focusNode = focusNode.rightChild;
 
@@ -370,6 +355,11 @@ public class BinaryTree {
                         list.add(parent.rightChild.data);
                         return;
                     }
+                } else {
+                    //If key matches with focus Node, add 1 to count
+                    //if (newNode.data.getaWord().equals(parent.data.getaWord())) {
+                        parent.data.setCount(parent.data.getCount() + 1);
+                        return;
                 }
             }
         }

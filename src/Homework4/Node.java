@@ -1,7 +1,7 @@
 package Homework4;
 
 /**
- * Class: Node
+ * Class: TEST.Node
  *
  * @author Kevin Figueroa
  * @version 1.0
