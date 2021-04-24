@@ -13,30 +13,53 @@ import java.util.Set;
  * Course: ITEC 3150 Spring 2021
  * Date Written: 4/21/2021
  * <p>
- * This class:
+ * This is a driver class, which means it contains the main method that will be used to run the program. In addition to
+ * the main method, it also contains methods that read a specified file while also calling a method that adds each Course
+ * object to the custom HashMap.
  * <p>
- * Purpose:
+ * Purpose: To integrate various Java competencies that we have learned over the whole semester.
  */
 public class Driver {
+    //Instance Variable
     private CourseHashMap<Integer, Course> theMap = new CourseHashMap<>();
 
     public static void main(String[] args) {
+        //create driver object to use methods and refer to HashMap
         Driver d = new Driver();
+
+        //call to method that reads text file
         d.readFile();
 
-        Set<Integer> keyset = d.theMap.keySet();
+        //call to method that prints HashMap
+        d.printHashMap();
+    }
+
+    /**
+     * This method temporarily creates a Set from the HashMap, which allows to be iterated and thus be printed to the
+     * console.
+     */
+    public void printHashMap(){
+        //create Set from keyset method
+        Set<Integer> keyset = theMap.keySet();
+
+        //iterate through the Set
         for (Integer key : keyset){
-            Course value= d.theMap.get(key);
+            Course value= theMap.get(key);
             System.out.println(key + ": " + value);
         }
     }
 
+    /**
+     * This method reads the specified text file containing raw Course object text that will be converted to an actual
+     * Course object. After making each Course object, it will then be added to the custom HashMap.
+     */
     public void readFile() {
         //open text file
         File courseFile = new File("C:\\Users\\kevin\\IdeaProjects\\ITEC3150\\src\\Homework5\\courses");
         //open a Scanner
         Scanner courseReader = null;
 
+        //try to read file
         try {
             courseReader = new Scanner(courseFile);
         } catch (FileNotFoundException e) {
@@ -50,6 +73,7 @@ public class Driver {
             int crn = java.lang.Integer.parseInt(temp);
             String name = courseReader.nextLine();
 
+            //if category is English, create EnglishCourse object
             if (category.equalsIgnoreCase("English")) {
                 String level = courseReader.nextLine();
                 temp = courseReader.nextLine();
@@ -60,7 +84,10 @@ public class Driver {
                 EnglishCourse engl = new EnglishCourse(crn, name, category, level, read, writ);
 
                 addCourse(engl);
-            } else if (category.equalsIgnoreCase("Math")) {
+            }
+
+            //if category is Math, create MathCourse object
+            else if (category.equalsIgnoreCase("Math")) {
                 temp = courseReader.nextLine();
                 boolean stem = Boolean.parseBoolean(temp);
                 String format = courseReader.nextLine();
@@ -68,7 +95,10 @@ public class Driver {
                 MathCourse math = new MathCourse(crn, name, category, stem, format);
 
                 addCourse(math);
-            } else if (category.equalsIgnoreCase("History")) {
+            }
+
+            //if category is History, create HistoryCourse object
+            else if (category.equalsIgnoreCase("History")) {
                 temp = courseReader.nextLine();
                 boolean areaE = Boolean.parseBoolean(temp);
                 String format = courseReader.nextLine();
@@ -76,12 +106,19 @@ public class Driver {
                 HistoryCourse hist = new HistoryCourse(crn, name, category, areaE, format);
 
                 addCourse(hist);
-            } else {
+            }
+
+            //Unknown category
+            else {
                 System.out.println("Unknown Course type " + category);
             }
         }
     }
 
+    /**
+     * This method adds the Course object to the HashMap
+     * @param course Course to be added to the HashMap
+     */
     private void addCourse(Course course) {
         theMap.put(course.getCourseCrn(), course);
     }
