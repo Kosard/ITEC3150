@@ -35,9 +35,9 @@ public class MathCourse extends Course implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + " MathCourse {" +
-                "isSTEM = " + isSTEM +
+        return super.toString() +
+                ", isSTEM = " + isSTEM +
                 ", Instruction Type = " + instructionType +
-                '}';
+                ']';
     }
 }
