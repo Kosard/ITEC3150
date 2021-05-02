@@ -23,17 +23,20 @@ public class Driver {
     public static void main(String[] args) {
         Driver d = new Driver();
         d.readFile();
+        d.printMap();
+    }
 
-        Set<Integer> keyset = d.theMap.keySet();
-        for (Integer key : keyset){
-            Course value= d.theMap.get(key);
-            System.out.println(key + ": " + value);
+    public void printMap() {
+        Set<Integer> keyset = theMap.keySet();
+        for (Integer key : keyset) {
+            Course value = theMap.get(key);
+            System.out.println("Unique ID = " + key + " : " + value);
         }
     }
 
     public void readFile() {
         //open text file
-        File courseFile = new File("C:\\Users\\kevin\\IdeaProjects\\ITEC3150\\src\\Homework5\\courses");
+        File courseFile = new File("C:\\Users\\kevin\\IntelliJIDEAProjects\\ITEC3150\\src\\Homework5\\courses");
         //open a Scanner
         Scanner courseReader = null;
 

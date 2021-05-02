@@ -42,8 +42,8 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "Course Name: " + courseName +
-                ", Course Discipline = " + courseDiscipline +
-                '}';
+        return "Course Name = " + courseName +
+                " | Course Discipline: " + courseDiscipline +
+                " |";
     }
 }
