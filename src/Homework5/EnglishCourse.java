@@ -41,8 +41,10 @@ public class EnglishCourse extends Course implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + " hasReading: " + hasReading +
-                " | hasWriting: " + hasWriting +
-                " | classification: " + classification;
+        return super.toString() +
+                ", hasReading = " + hasReading +
+                ", hasWriting = " + hasWriting +
+                ", classification = " + classification +
+                ']';
     }
 }

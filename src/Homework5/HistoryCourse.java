@@ -36,7 +36,9 @@ public class HistoryCourse extends Course implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + " Area E Eligible: " + areaE_Eligible +
-                " | Instruction Type: " + instructionType;
+        return super.toString() +
+                ", Area E Eligible = " + areaE_Eligible +
+                ", Instruction Type = " + instructionType +
+                ']';
     }
 }

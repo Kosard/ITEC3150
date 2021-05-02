@@ -1,10 +1,7 @@
 package Homework5;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -15,9 +12,10 @@ import java.util.Set;
  * Course: ITEC 3150 Spring 2021
  * Date Written: 4/21/2021
  * <p>
- * This class:
+ * This class is a variation of the implementation of a Hashmap that contains Integers as its keys and Course objects
+ * as its values.
  * <p>
- * Purpose:
+ * Purpose: To show how to implement different classes as parameters for a HashMap template
  */
 
 public class CourseHashMap<Integer, Course> implements MyMap<Integer, Course> {
