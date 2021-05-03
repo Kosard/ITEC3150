@@ -39,13 +39,15 @@ public class Driver {
      * console.
      */
     public void printHashMap(){
+        String format = "%-10s %-10s %-15s\n";
         //create Set from keyset method
         Set<Integer> keyset = theMap.keySet();
 
+        System.out.printf(format, "CRN", "Course Name", "Subject");
         //iterate through the Set
         for (Integer key : keyset){
             Course value= theMap.get(key);
-            System.out.println(key + ": " + value);
+            System.out.printf(format, key, value.getCourseName(), value.getCourseDiscipline());
         }
     }
 
