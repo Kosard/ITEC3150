@@ -277,17 +277,4 @@ public class CourseHashMap<Integer, Course> implements MyMap<Integer, Course> {
         }
         return set;
     }
-
-    public String toString() {
-        StringBuilder builder = new StringBuilder("[");
-
-        for (int i = 0; i < capacity; i++) {
-            if (table[i] != null && table[i].size() > 0)
-                for (Entry<Integer, Course> entry : table[i])
-                    builder.append(entry);
-        }
-
-        builder.append("]");
-        return builder.toString();
-    }
 }

@@ -44,6 +44,8 @@ public class Async_KevinF {
 
             //Call to start method
             thread.start();
+            System.out.println("Starting thread #" + thread.getId() + ", With a current sum of: " + adder.getSum());
+
         }
         //Print sum
         System.out.println("Sum with Asynchronous threads = " + adder.getSum());
