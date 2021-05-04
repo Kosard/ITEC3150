@@ -1,13 +1,6 @@
 package Week_3;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
-import java.io.ObjectOutputStream;
-import java.io.ObjectInputStream;
-import java.io.IOException;
-import java.io.EOFException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -82,13 +75,29 @@ public class Main {
                 DataInputStream inputStream = new DataInputStream(new FileInputStream("people.dat"))
         ) {
             //Go through the list
-            for (PersonObject person : ppl) {
+            for (int i = 0; i < ppl.size(); i++){
                 //Create a temporary Person object by reading the attributes from the file
                 PersonObject temp = new PersonObject(inputStream.readUTF(), inputStream.readUTF(), inputStream.read(), inputStream.readUTF());
                 //Implicitly call the toString method to print to console
                 System.out.println(temp);
             }
         }
+//        try {
+//            DataInputStream inputStream = new DataInputStream(new FileInputStream("people.dat"));
+//            try{
+//                while (true){
+//                    //Create a temporary Person object by reading the attributes from the file
+//                    PersonObject temp = new PersonObject(inputStream.readUTF(), inputStream.readUTF(), inputStream.read(), inputStream.readUTF());
+//                    //Implicitly call the toString method to print to console
+//                    System.out.println(temp);
+//                }
+//            } catch (EOFException e){
+//                System.out.print("");
+//            }
+//            inputStream.close();
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
     }
 
     /**
@@ -119,17 +128,17 @@ public class Main {
         try (
                 ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("people.dat"))
         ) {
-            //Go through list
-            while (true) {
-                //Read Person object from file and print to console
-                System.out.println(inputStream.readObject());
+            try{
+                while (true) {
+                    //Read Person object from file and print to console
+                    System.out.println(inputStream.readObject());
+                }
+            } catch (EOFException e){
+                System.out.print("");
             }
         }
-        //while loop will continue until file ends
-        catch (EOFException | ClassNotFoundException e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
-        //readObject method throws this exception
-
     }
 }
