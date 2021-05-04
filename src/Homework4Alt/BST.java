@@ -63,7 +63,7 @@ public class BST {
 
         //If node with textword does not exist, create a new one
         if (node == null){
-            node = new Node(new Word(textWord));
+            node = new Node(word);
         } else {
             //Compare Word objects to see if node goes on the left of tree
             if (word.compareTo(node.data) < 0){
