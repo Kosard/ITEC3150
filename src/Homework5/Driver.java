@@ -43,7 +43,7 @@ public class Driver {
         //create Set from keyset method
         Set<Integer> keyset = theMap.keySet();
 
-        System.out.printf(format, "CRN", "Course Name", "Subject", "Other Characteristics");
+        System.out.printf(format, "CRN", "Course Name", "Discipline", "Course Features");
         //iterate through the Set
         for (Integer key : keyset){
             Course value= theMap.get(key);
